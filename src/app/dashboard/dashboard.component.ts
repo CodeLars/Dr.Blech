@@ -68,13 +68,14 @@ export class DashboardComponent implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       const tableBody = document.querySelector('#example tbody');
       if (tableBody) {
-        tableBody.innerHTML = ''; // Entferne alle vorhandenen Zeilen
+        tableBody.innerHTML = ''; 
         offers.forEach(offer => {
           const row = document.createElement('tr');
+          const formattedAmount = offer.pauschalbetrag.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace('.', ',');
           row.innerHTML = `
             <td>${offer.Blechart}</td>
             <td>${offer.nachname}</td>
-            <td>${offer.pauschalbetrag} €</td>
+            <td>${formattedAmount} €</td>
           `;
           tableBody.appendChild(row);
         });
@@ -83,7 +84,6 @@ export class DashboardComponent implements AfterViewInit {
       }
     }
   }
-
   updateCustomerDropdown(): void {
     const selectElement = document.getElementById('existingCustomer') as HTMLSelectElement;
     selectElement.innerHTML = ''; // Entferne alle vorhandenen Optionen
