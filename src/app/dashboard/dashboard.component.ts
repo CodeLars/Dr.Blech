@@ -28,20 +28,20 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   loadCustomers(): void {
-    console.log("loadCustomers aufgerufen"); // Debugging-Anweisung
+    console.log("loadCustomers aufgerufen"); 
     fetch('http://localhost/Dr.Blech/backend/api.php?action=getCustomers')
       .then(response => {
-        console.log("Response erhalten:", response); // Debugging-Anweisung
+        console.log("Response erhalten:", response); 
         return response.json();
       })
-      .then((data: any[]) => { // Definiere den Typ der data-Variable
-        console.log("Daten erhalten:", data); // Debugging-Anweisung
+      .then((data: any[]) => { 
+        console.log("Daten erhalten:", data); 
         this.customers = data.map((customer: any) => ({
-          id: customer.kundennummer, // Verwende die Großbuchstaben, die in der API-Antwort zurückgegeben werden
-          name: `${customer.vorname} ${customer.nachname} (${customer.kundennummer})` // Verwende die Großbuchstaben, die in der API-Antwort zurückgegeben werden
+          id: customer.kundennummer, 
+          name: `${customer.vorname} ${customer.nachname} (${customer.kundennummer})` 
         }));
-        console.log("Kunden geladen:", this.customers); // Debugging-Anweisung
-        this.updateCustomerDropdown(); // Aktualisiere das Dropdown-Menü
+        console.log("Kunden geladen:", this.customers); 
+        this.updateCustomerDropdown(); 
       })
       .catch(error => {
         console.error('Fehler beim Laden der Kunden', error);
@@ -49,15 +49,15 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   loadOffers(): void {
-    console.log("loadOffers aufgerufen"); // Debugging-Anweisung
+    console.log("loadOffers aufgerufen"); 
     fetch('http://localhost/Dr.Blech/backend/api.php?action=getOffers')
       .then(response => {
-        console.log("Response erhalten:", response); // Debugging-Anweisung
+        console.log("Response erhalten:", response); 
         return response.json();
       })
-      .then((data: any[]) => { // Definiere den Typ der data-Variable
-        console.log("Angebote erhalten:", data); // Debugging-Anweisung
-        this.updateOffersTable(data); // Aktualisiere die Tabelle
+      .then((data: any[]) => { 
+        console.log("Angebote erhalten:", data); 
+        this.updateOffersTable(data); 
       })
       .catch(error => {
         console.error('Fehler beim Laden der Angebote', error);
@@ -86,10 +86,10 @@ export class DashboardComponent implements AfterViewInit {
   }
   updateCustomerDropdown(): void {
     const selectElement = document.getElementById('existingCustomer') as HTMLSelectElement;
-    selectElement.innerHTML = ''; // Entferne alle vorhandenen Optionen
+    selectElement.innerHTML = ''; 
     this.customers.forEach(customer => {
       const option = document.createElement('option');
-      option.value = customer.id.toString(); // Setze nur die Kundennummer als Wert
+      option.value = customer.id.toString();
       option.text = customer.name;
       selectElement.appendChild(option);
     });
@@ -105,13 +105,13 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   onSubmit(event: Event): void {
-    event.preventDefault(); // Verhindere das Standardverhalten des Formulars
+    event.preventDefault(); 
 
-    console.log("onSubmit aufgerufen"); // Debugging-Anweisung
+    console.log("onSubmit aufgerufen");
 
     const formData = {
       newCustomer: this.isNewCustomer,
-      existingCustomer: (document.getElementById('existingCustomer') as HTMLSelectElement).value, // Nur die Kundennummer
+      existingCustomer: (document.getElementById('existingCustomer') as HTMLSelectElement).value, 
       blechart: (document.getElementById('blechart') as HTMLSelectElement).value,
       material: (document.getElementById('material') as HTMLSelectElement).value,
       width: (document.getElementById('width') as HTMLInputElement).value,
@@ -126,7 +126,7 @@ export class DashboardComponent implements AfterViewInit {
       quantity: (document.getElementById('quantity') as HTMLInputElement).value
     };
 
-    console.log("data", formData); // Füge formData zur Konsole hinzu, um die Daten zu überprüfen
+    console.log("data", formData); 
     fetch('http://localhost/Dr.Blech/backend/api.php', {
       method: 'POST',
       headers: {
@@ -137,7 +137,7 @@ export class DashboardComponent implements AfterViewInit {
     .then(response => response.json())
     .then(data => {
       console.log('Angebot erfolgreich erstellt', data);
-      this.loadOffers(); // Aktualisiere die Tabelle nach dem Erstellen eines Angebots
+      this.loadOffers(); 
     })
     .catch(error => {
       console.error('Fehler beim Erstellen des Angebots', error);
