@@ -10,8 +10,6 @@ export class DashboardComponent implements AfterViewInit {
   isNewCustomer = false;
   isCustomAmount = false;
   customers: any[] = [];
-  blechartTypes = ['Typ 1', 'Typ 2'];
-  materials = ['Material 1', 'Material 2'];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -144,5 +142,7 @@ export class DashboardComponent implements AfterViewInit {
     .catch(error => {
       console.error('Fehler beim Erstellen des Angebots', error);
     });
+
+    location.reload(); 
   }
 }
