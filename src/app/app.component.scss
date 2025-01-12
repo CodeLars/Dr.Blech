@@ -1,0 +1,45 @@
+
+
+  @media (max-width: 767.98px) {
+    body {
+        background-image: url('../assets/bg.jpg'); /* Pfad zum Hintergrundbild */
+        background-size: cover; /* Bildgröße anpassen */
+        background-repeat: no-repeat; /* Bild nicht wiederholen */
+        background-attachment: fixed;
+        background-position: center center; /* Bild zentrieren */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif; /* Beispiel-Schriftart */
+        color: #212529; /* Textfarbe */
+      }
+  }
+  
+  // Tablet (tablets, 768px and up)
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    body {
+        background-image: url('../assets/bg.jpg'); /* Pfad zum Hintergrundbild */
+        background-size: cover; /* Bildgröße anpassen */
+        background-repeat: no-repeat; /* Bild nicht wiederholen */
+        background-attachment: fixed;
+        background-position: center center; /* Bild zentrieren */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif; /* Beispiel-Schriftart */
+        color: #212529; /* Textfarbe */
+      }
+  }
+  
+  // Desktop (desktops, 992px and up)
+  @media (min-width: 992px) {
+    body {
+        background-image: url('../assets/bg.jpg'); /* Pfad zum Hintergrundbild */
+        background-size: cover; /* Bildgröße anpassen */
+        background-repeat: no-repeat; /* Bild nicht wiederholen */
+        background-attachment: fixed;
+        background-position: center center; /* Bild zentrieren */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif; /* Beispiel-Schriftart */
+        color: #212529; /* Textfarbe */
+      }
+  }

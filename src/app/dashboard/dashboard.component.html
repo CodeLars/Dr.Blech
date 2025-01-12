@@ -1,0 +1,156 @@
+
+<div class="container-fluid p-0 mt-2">
+    <div class="row hero-container">
+        <div class="spacer-above-hero"></div>
+      </div>
+    <div class="row hero-container align-items-center">
+        <div class="col-lg-6 col-12 text-center">
+          <img src="../../assets/logo.png" class="img-fluid logo" alt="Responsive image" style="opacity: 1 !important;">
+        </div>
+        <div class="col-lg-6 col-12 mt-3 mt-lg-0 tablet-margin">
+          <h1>Admin Dashboard</h1>
+          <div class="row button-container">
+            <div class="col-md-6 mt-2">
+              <a class="btn btn-primary href-margin visuals" href="#create-Angebot" role="button">Neues Angebot</a>
+            </div>
+            <div class="col-md-6 mt-2">
+              <a class="btn btn-primary href-margin visuals" href="#search-Angebot" role="button">Angebote suchen</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row hero-container">
+        <div class="spacer-insidehero"></div>
+      </div>
+
+
+<div style="margin-top: 60%;" class="spacer-above-create" ></div>
+<div class="row create-Angebot" id="create-Angebot">
+    <div style="margin-top: 1%"></div>
+    <div class="create-Angebot-width">
+        <h1>Neues Angebot erstellen</h1>
+        <form class="col-12" (submit)="onSubmit($event)">
+            <!-- Kundentyp -->
+            <div class="form-group">
+              <label for="newCustomer">Kundentyp</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="newCustomer" (change)="toggleCustomerType($event)">
+                <label class="form-check-label" for="newCustomer">Neukunde</label>
+              </div>
+              <select class="form-control" id="existingCustomer" [disabled]="isNewCustomer">
+                <!-- Optionen werden hier dynamisch hinzugefügt -->
+              </select>
+            </div>
+            
+            <!-- Blechart -->
+            <div class="form-group">
+              <label for="blechart">Blechart</label>
+              <select class="form-control" id="blechart">
+                <option value="">Blechart auswählen</option>
+                <option value="Rechteckblech">Rechteckblech</option>
+              </select>
+            </div>
+            
+            <!-- Material -->
+            <div class="form-group">
+              <label for="material">Material</label>
+              <select class="form-control" id="material">
+                <option value="">Material auswählen</option>
+                <option value="Weißblech">Weißblech</option>
+                <option value="Edelstahl">Edelstahl</option>
+                <option value="Zink">Zink</option>
+                <option value="Kupfer">Kupfer</option>
+                <option value="Silber">Silber</option>
+                <option value="Gold">Gold</option>  
+            </select>
+            </div>
+            
+            <!-- Breite -->
+            <div class="form-group">
+              <label for="width">Breite (min 5 cm bis 300 cm)</label>
+              <input type="number" class="form-control" id="width" min="5" max="300" placeholder="Breite">
+            </div>
+            
+            <!-- Länge -->
+            <div class="form-group">
+              <label for="length">Länge (min 5 cm bis 300 cm)</label>
+              <input type="number" class="form-control" id="length" min="5" max="300" placeholder="Länge">
+            </div>
+            
+            <!-- Stärke -->
+            <div class="form-group">
+              <label for="thickness">Stärke (min 0,1 mm bis 5,0 mm)</label>
+              <input type="number" class="form-control" id="thickness" step="0.1" min="0.1" max="5.0" placeholder="Stärke">
+            </div>
+            
+            <!-- Individueller Betrag -->
+            <div class="form-group">
+              <label for="customAmount">Individueller Betrag (50€ bis 10000€)</label>
+              <input type="number" class="form-control" id="customAmount" min="50" max="10000" (input)="toggleProcessingSteps($event)" placeholder="Individueller Betrag">
+            </div>
+            
+            <!-- Verarbeitungsgänge -->
+            <div class="form-group">
+              <label>Verarbeitungsgänge</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="cutting" checked disabled>
+                <label class="form-check-label" for="cutting">Zuschneiden (Standard) (10€)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="stamping" [disabled]="isCustomAmount">
+                <label class="form-check-label" for="stamping">Stanzen (20€)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="bending" [disabled]="isCustomAmount">
+                <label class="form-check-label" for="bending">Biegen (15€)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="surfaceTreatment" [disabled]="isCustomAmount">
+                <label class="form-check-label" for="surfaceTreatment">Oberflächenbehandlung (25€)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="milling" [disabled]="isCustomAmount">
+                <label class="form-check-label" for="milling">Einfräsen (17€)</label>
+              </div>
+            </div>
+            
+            <!-- Menge -->
+            <div class="form-group">
+              <label for="quantity">Menge (1-100)</label>
+              <input type="number" class="form-control" id="quantity" min="1" max="100" placeholder="Menge">
+            </div>
+            
+            <!-- Speichern Button -->
+            <button type="submit" class="btn btn-primary mt-3">Speichern</button>
+          </form>
+
+    </div>
+    
+      <div style="margin-top: 1%"></div>
+</div>
+<div class="spacer-mid"></div>
+
+
+    <div style="margin-top: 20%; " class="row angebot-container" id="search-Angebot">
+        <div style="margin-top: 1%"></div>
+        <div class="create-Angebot-width">
+        <h1>Angebote suchen</h1>
+
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>Blechart</th>
+                <th>Nachname</th>
+                <th>Betrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Zeilen werden hier dynamisch hinzugefügt -->
+            </tbody>
+          </table>
+        </div>
+          <div style="margin-top: 1%"></div>
+    </div>
+
+</div>
+<div class="spacer-bot"></div>

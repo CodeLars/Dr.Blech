@@ -1,0 +1,179 @@
+// Handy (portrait phones, less than 768px)
+@media (max-width: 767.98px) {
+    a.btn {
+        display: block; /* Macht den Link zu einem Block-Element */
+        width: 100%; /* Nimmt die gesamte Breite des übergeordneten Elements ein */
+        text-align: center; /* Zentriert den Text im Link */
+      }
+
+    h1{
+        display: block; /* Macht den Link zu einem Block-Element */
+        width: 100%; /* Nimmt die gesamte Breite des übergeordneten Elements ein */
+        text-align: center; /* Zentriert den Text im Link */
+    }
+
+    .hero-container
+    {
+        background-color:  white;
+        opacity: 1;
+    }
+    .angebot-container
+    {
+        background-color: white;
+        opacity: 1;
+    }
+    .button-container
+    {
+        opacity: 1;
+    }
+    .create-Angebot
+    {
+        background-color: white;
+        opacity: 1;
+    }
+    .spacer-bot
+    {
+        margin-top: 60%;
+    }
+    .spacer-mid
+    {
+        margin-top: 60%;
+    }
+    .spacer-insidehero
+    {
+        margin-top: 30%;
+    }
+    .spacer-below-logo
+    {
+        margin-top: 30%;
+    }
+    .spacer-above-hero{
+        margin-top: 10%;
+    }
+  }
+  
+  // Tablet (tablets, 768px and up)
+  @media (min-width: 768px) and (max-width: 991.98px) {
+
+    .hero-container
+    {
+        background-color:  white;
+        opacity: 1;
+    }
+    .button-container
+    {
+
+        opacity: 1;
+    }
+
+    .angebot-container
+    {
+        background-color: white;
+        opacity: 1;
+    }
+    .create-Angebot
+    {
+        background-color: white;
+        opacity: 1;
+    }
+    .spacer-below-logo
+    {
+        margin-top: 10%;
+    }
+    .spacer-bot
+    {
+        margin-top: 50%;
+    }
+    .spacer-mid
+    {
+        margin-top: 50%;
+    }
+    .spacer-insidehero
+    {
+        margin-top: 15%;
+    }
+    .logo{
+        width: 90%;
+    }
+    .create-Angebot-width
+    {
+        width: 90%;
+        margin-left: 5%;
+    }
+    .spacer-above-hero{
+        margin-top: 10%;
+    }
+    .tablet-margin{
+        margin-left: 5% !important;
+    }
+  }
+  
+  // Desktop (desktops, 992px and up)
+  @media (min-width: 992px) {
+    .spacer-above-hero{
+        margin-top: 4%;
+    }
+    .hero-container
+    {
+        background-color:  white;
+        opacity: 1;
+    }
+    .angebot-container
+    {
+        background-color: white;
+        opacity: 1;
+    }
+    .button-container
+    {
+
+        opacity: 1;
+    }
+    .create-Angebot
+    {
+        background-color: white;
+        opacity: 1;
+    }
+    .create-Angebot-width
+    {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .spacer-bot
+    {
+        margin-top: 20%;
+    }
+    .spacer-mid
+    {
+        margin-top: 20%;
+    }
+    .spacer-insidehero
+    {
+        margin-top: 5%;
+    }
+    .spacer-below-logo
+    {
+        margin-top: 5%;
+    }
+    .logo{
+        width: 80%;
+    }
+    .spacer-above-create
+    {
+        margin-top: 20% !important;
+    }
+  }
+
+  .visuals
+  {
+    background-color: black;
+    border: none;
+    border-radius: 0px;
+  }
+  a.btn:focus, a.btn:active {
+    background-color: grey; 
+    color: white; 
+  }
+
+
+
