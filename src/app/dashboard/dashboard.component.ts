@@ -74,7 +74,7 @@ export class DashboardComponent implements AfterViewInit {
           row.innerHTML = `
             <td>${offer.Blechart}</td>
             <td>${offer.nachname}</td>
-            <td>${offer.pauschalbetrag}</td>
+            <td>${offer.pauschalbetrag} €</td>
           `;
           tableBody.appendChild(row);
         });
