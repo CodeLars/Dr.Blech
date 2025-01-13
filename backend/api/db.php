@@ -39,7 +39,9 @@ class Database {
             return "Fehler: " . $this->conn->error;
         }
     }
-
+    public function escape($value) {
+        return $this->conn->real_escape_string($value);
+    }
 
     public function __destruct() {
         $this->conn->close();

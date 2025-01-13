@@ -1,23 +1,20 @@
 <?php 
 class Blech {
-    private $newCustomer;
-    private $existingCustomer;
     private $blechart;
     private $material;
     private $width;
     private $length;
     private $thickness;
-    private $customAmount;
     private $stamping;
     private $bending;
     private $surfaceTreatment;
     private $milling;
     private $quantity;
+    private $cutting;
 
     // Konstruktor zum Initialisieren der Attribute
-    public function __construct($newCustomer, $existingCustomer, $blechart, $material, $width, $length, $thickness, $stamping, $bending, $surfaceTreatment, $milling, $quantity) {
-        $this->newCustomer = $newCustomer;
-        $this->existingCustomer = $existingCustomer;
+    public function __construct($blechart, $material, $width, $length, $thickness, $stamping, $bending, $surfaceTreatment, $milling, $quantity, $cutting) {
+
         $this->blechart = $blechart;
         $this->material = $material;
         $this->width = $width;
@@ -28,15 +25,13 @@ class Blech {
         $this->surfaceTreatment = $surfaceTreatment;
         $this->milling = $milling;
         $this->quantity = $quantity;
+        $this->$cutting = $cutting;
     }
 
     // Getter-Methoden
-    public function getNewCustomer() {
-        return $this->newCustomer;
-    }
 
-    public function getExistingCustomer() {
-        return $this->existingCustomer;
+    public function getCutting() {
+        return $this->cutting;
     }
 
     public function getBlechart() {
@@ -81,13 +76,6 @@ class Blech {
     }
 
     // Setter-Methoden
-    public function setNewCustomer($newCustomer) {
-        $this->newCustomer = $newCustomer;
-    }
-
-    public function setExistingCustomer($existingCustomer) {
-        $this->existingCustomer = $existingCustomer;
-    }
 
     public function setBlechart($blechart) {
         $this->blechart = $blechart;
@@ -128,6 +116,10 @@ class Blech {
 
     public function setQuantity($quantity) {
         $this->quantity = $quantity;
+    }
+
+    public function setCutting($cutting) {
+        $this->cutting = $cutting;
     }
 }
 ?>

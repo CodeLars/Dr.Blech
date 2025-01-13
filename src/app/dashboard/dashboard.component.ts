@@ -10,6 +10,7 @@ export class DashboardComponent implements AfterViewInit {
   isNewCustomer = false;
   isCustomAmount = false;
   customers: any[] = [];
+  materials: any[] = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -24,12 +25,13 @@ export class DashboardComponent implements AfterViewInit {
       });
       this.loadCustomers();
       this.loadOffers();
+      this.loadMaterials();
     }
   }
 
   loadCustomers(): void {
     console.log("loadCustomers aufgerufen"); 
-    fetch('http://localhost/Dr.Blech/backend/api.php?action=getCustomers')
+    fetch('http://localhost/Dr.Blech/backend/api/index.php/api/customers')
       .then(response => {
         console.log("Response erhalten:", response); 
         return response.json();
@@ -50,7 +52,7 @@ export class DashboardComponent implements AfterViewInit {
 
   loadOffers(): void {
     console.log("loadOffers aufgerufen"); 
-    fetch('http://localhost/Dr.Blech/backend/api.php?action=getOffers')
+    fetch('http://localhost/Dr.Blech/backend/api/index.php/api/offers')
       .then(response => {
         console.log("Response erhalten:", response); 
         return response.json();
@@ -64,33 +66,70 @@ export class DashboardComponent implements AfterViewInit {
       });
   }
 
+  loadMaterials(): void {
+    console.log("loadMaterials aufgerufen"); 
+    fetch('http://localhost/Dr.Blech/backend/api/index.php/api/materials')
+      .then(response => {
+        console.log("Response erhalten:", response); 
+        return response.json();
+      })
+      .then((data: any[]) => { 
+        console.log("Materialien erhalten:", data); 
+        this.materials = data.map((material: any) => ({
+          id: material.Id, // Verwende 'Id' anstelle von 'id'
+          name: material.name 
+        }));
+        console.log("Materialien geladen:", this.materials); 
+        this.updateMaterialDropdown(); 
+      })
+      .catch(error => {
+        console.error('Fehler beim Laden der Materialien', error);
+      });
+  }
+
   updateOffersTable(offers: any[]): void {
     if (isPlatformBrowser(this.platformId)) {
       const tableBody = document.querySelector('#example tbody');
       if (tableBody) {
         tableBody.innerHTML = ''; 
-        offers.forEach(offer => {
-          const row = document.createElement('tr');
-          const formattedAmount = offer.pauschalbetrag.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace('.', ',');
-          row.innerHTML = `
-            <td>${offer.Blechart}</td>
-            <td>${offer.nachname}</td>
-            <td>${formattedAmount} €</td>
-          `;
-          tableBody.appendChild(row);
-        });
+        if (Array.isArray(offers)) {
+          offers.forEach(offer => {
+            const row = document.createElement('tr');
+            const formattedAmount = offer.pauschalbetrag.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace('.', ',');
+            row.innerHTML = `
+              <td>${offer.Blechart}</td>
+              <td>${offer.nachname}</td>
+              <td>${formattedAmount} €</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        } else {
+          console.error('Keine Angebote vorhanden');
+        }
       } else {
         console.error('Tabelle oder tbody-Element nicht gefunden');
       }
     }
   }
+
   updateCustomerDropdown(): void {
     const selectElement = document.getElementById('existingCustomer') as HTMLSelectElement;
     selectElement.innerHTML = ''; 
     this.customers.forEach(customer => {
       const option = document.createElement('option');
-      option.value = customer.id.toString();
+      option.value = customer.id.toString(); 
       option.text = customer.name;
+      selectElement.appendChild(option);
+    });
+  }
+
+  updateMaterialDropdown(): void {
+    const selectElement = document.getElementById('material') as HTMLSelectElement;
+    selectElement.innerHTML = ''; 
+    this.materials.forEach(material => {
+      const option = document.createElement('option');
+      option.value = material.id.toString(); 
+      option.text = material.name;
       selectElement.appendChild(option);
     });
   }
@@ -106,28 +145,31 @@ export class DashboardComponent implements AfterViewInit {
 
   onSubmit(event: Event): void {
     event.preventDefault(); 
-
-    console.log("onSubmit aufgerufen");
-
-    const formData = {
-      newCustomer: this.isNewCustomer,
-      existingCustomer: (document.getElementById('existingCustomer') as HTMLSelectElement).value, 
-      blechart: (document.getElementById('blechart') as HTMLSelectElement).value,
-      material: (document.getElementById('material') as HTMLSelectElement).value,
-      width: (document.getElementById('width') as HTMLInputElement).value,
-      length: (document.getElementById('length') as HTMLInputElement).value,
-      thickness: (document.getElementById('thickness') as HTMLInputElement).value,
-      customAmount: (document.getElementById('customAmount') as HTMLInputElement).value,
-      cutting: (document.getElementById('cutting') as HTMLInputElement).checked,
-      stamping: (document.getElementById('stamping') as HTMLInputElement).checked,
-      bending: (document.getElementById('bending') as HTMLInputElement).checked,
-      surfaceTreatment: (document.getElementById('surfaceTreatment') as HTMLInputElement).checked,
-      milling: (document.getElementById('milling') as HTMLInputElement).checked,
-      quantity: (document.getElementById('quantity') as HTMLInputElement).value
+  
+    console.log("onSubmit aufgerufen"); 
+  
+    const formData: any = {
+      blechart: (document.getElementById('blechart') as HTMLSelectElement)?.value,
+      material: (document.getElementById('material') as HTMLSelectElement)?.value,
+      width: (document.getElementById('width') as HTMLInputElement)?.value,
+      length: (document.getElementById('length') as HTMLInputElement)?.value,
+      thickness: (document.getElementById('thickness') as HTMLInputElement)?.value,
+      cutting: (document.getElementById('cutting') as HTMLInputElement)?.checked,
+      stamping: (document.getElementById('stamping') as HTMLInputElement)?.checked,
+      bending: (document.getElementById('bending') as HTMLInputElement)?.checked,
+      surfaceTreatment: (document.getElementById('surfaceTreatment') as HTMLInputElement)?.checked,
+      milling: (document.getElementById('milling') as HTMLInputElement)?.checked,
+      quantity: (document.getElementById('quantity') as HTMLInputElement)?.value
     };
-
+  
+    // Überprüfe, ob ein individueller Betrag angegeben wurde
+    const customAmountElement = document.getElementById('customAmount') as HTMLInputElement;
+    if (customAmountElement && customAmountElement.value) {
+      formData.customAmount = customAmountElement.value;
+    }
+  
     console.log("data", formData); 
-    fetch('http://localhost/Dr.Blech/backend/api.php', {
+    fetch('http://localhost/Dr.Blech/backend/api/index.php/api/blech', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -137,12 +179,45 @@ export class DashboardComponent implements AfterViewInit {
     .then(response => response.json())
     .then(data => {
       console.log('Angebot erfolgreich erstellt', data);
-      this.loadOffers(); 
+      const blechId = data.id; // Speichere die zurückgegebene ID
+      console.log('Erstellte Blech ID:', blechId);
+  
+      // Sende einen weiteren POST-Request mit der Blech ID und der ausgewählten Kunden ID
+      const customerElement = document.getElementById('existingCustomer') as HTMLSelectElement;
+      if (customerElement) {
+        const customerId = customerElement.value;
+        const customerBlechData: any = {
+          blechId: blechId,
+          customerNumber: customerId
+        };
+  
+        // Füge den individuellen Betrag hinzu, falls vorhanden
+        if (formData.customAmount) {
+          customerBlechData.customAmount = formData.customAmount;
+        }
+        console.log(JSON.stringify(customerBlechData));
+  
+        fetch('http://localhost/Dr.Blech/backend/api/index.php/api/offers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(customerBlechData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Kunde erfolgreich zugeordnet', data);
+          this.loadOffers(); 
+          location.reload(); 
+        })
+        .catch(error => {
+          console.error('Fehler beim Zuordnen des Kunden', error);
+        });
+      } else {
+        console.error('Kunden-Element nicht gefunden');
+      }
     })
     .catch(error => {
       console.error('Fehler beim Erstellen des Angebots', error);
     });
-
-    location.reload(); 
-  }
-}
+  }}
