@@ -38,16 +38,25 @@
                 <input class="form-check-input" type="checkbox" id="newCustomer" (change)="toggleCustomerType($event)">
                 <label class="form-check-label" for="newCustomer">Neukunde</label>
               </div>
+
               <select class="form-control" id="existingCustomer" [disabled]="isNewCustomer">
+                
                 <!-- Optionen werden hier dynamisch hinzugefügt -->
               </select>
             </div>
+                        <!-- Neukundendaten -->
+            <div class="form-group">
+              <label for="NewfirstName">Vorname:</label>
+              <input class="form-control" id="NewfirstName" type="text" [disabled]="!isNewCustomer" placeholder="Vorname">
             
+              <label for="NewlastName">Nachname:</label>
+              <input class="form-control" id="NewlastName" type="text" placeholder="Nachname" [disabled]="!isNewCustomer">
+            </div>
             <!-- Blechart -->
             <div class="form-group">
               <label for="blechart">Blechart</label>
               <select class="form-control" id="blechart">
-                <option value="">Blechart auswählen</option>
+                <option value="" disabled selected >Blechart auswählen</option>
                 <option value="Rechteckblech">Rechteckblech</option>
               </select>
             </div>
@@ -85,8 +94,9 @@
             </div>
             
             <!-- Verarbeitungsgänge -->
-            <div class="form-group">
-              <label>Verarbeitungsgänge</label>
+            <label for="cutting">Verarbeitungsgänge</label>
+            <div class="form-group" id ="verarbeitung">
+              
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="cutting" checked disabled>
                 <label class="form-check-label" for="cutting">Zuschneiden (Standard) (10€)</label>

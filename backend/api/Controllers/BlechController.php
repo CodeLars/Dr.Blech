@@ -144,15 +144,15 @@ class BlechController {
                 $sql = "UPDATE Blech SET 
                     Blechart = '" . $this->db->escape($blech->getBlechart()) . "',
                     Material = '" . $this->db->escape($blech->getMaterial()) . "',
-                    Breite = '" . $this->db->escape($blech->getBreite()) . "',
-                    Länge = '" . $this->db->escape($blech->getLänge()) . "',
-                    Dicke = '" . $this->db->escape($blech->getDicke()) . "',
-                    Zuschneiden = '" . $this->db->escape($blech->getSchneiden()) . "',
-                    Stanzen = '" . $this->db->escape($blech->getStanzen()) . "',
-                    Biegen = '" . $this->db->escape($blech->getBiegen()) . "',
-                    Oberflächenbehandlung = '" . $this->db->escape($blech->getOberflächenbehandlung()) . "',
-                    Einfräsen = '" . $this->db->escape($blech->getFräsen()) . "',
-                    Menge = '" . $this->db->escape($blech->getMenge()) . "'
+                    Breite = '" . $this->db->escape($blech->getWidth()) . "',
+                    Länge = '" . $this->db->escape($blech->getLength()) . "',
+                    Dicke = '" . $this->db->escape($blech->getThickness()) . "',
+                    Zuschneiden = '" . $this->db->escape($blech->getCutting()) . "',
+                    Stanzen = '" . $this->db->escape($blech->getStamping()) . "',
+                    Biegen = '" . $this->db->escape($blech->getBending()) . "',
+                    Oberflächenbehandlung = '" . $this->db->escape($blech->getSurfaceTreatment()) . "',
+                    Einfräsen = '" . $this->db->escape($blech->getMilling()) . "',
+                    Menge = '" . $this->db->escape($blech->getQuantity()) . "'
                     WHERE id = " . $this->db->escape($input['id']);
 
                 if ($this->db->execute($sql)) {

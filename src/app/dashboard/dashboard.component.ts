@@ -9,6 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class DashboardComponent implements AfterViewInit {
   isNewCustomer = false;
   isCustomAmount = false;
+  numberCache = "";
   customers: any[] = [];
   materials: any[] = [];
 
@@ -115,6 +116,12 @@ export class DashboardComponent implements AfterViewInit {
   updateCustomerDropdown(): void {
     const selectElement = document.getElementById('existingCustomer') as HTMLSelectElement;
     selectElement.innerHTML = ''; 
+        // Create placeholder option with disabled attribute
+        const placeholderOption = new Option('Kunde auswählen', '');
+        placeholderOption.disabled = true;
+        placeholderOption.selected = true;
+        selectElement.appendChild(placeholderOption);
+
     this.customers.forEach(customer => {
       const option = document.createElement('option');
       option.value = customer.id.toString(); 
@@ -126,6 +133,12 @@ export class DashboardComponent implements AfterViewInit {
   updateMaterialDropdown(): void {
     const selectElement = document.getElementById('material') as HTMLSelectElement;
     selectElement.innerHTML = ''; 
+
+    const placeholderOption = new Option('Material auswählen', '');
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    selectElement.appendChild(placeholderOption);
+
     this.materials.forEach(material => {
       const option = document.createElement('option');
       option.value = material.id.toString(); 
@@ -161,11 +174,35 @@ export class DashboardComponent implements AfterViewInit {
       milling: (document.getElementById('milling') as HTMLInputElement)?.checked,
       quantity: (document.getElementById('quantity') as HTMLInputElement)?.value
     };
-  
+    //kundenummer holen aus select
+    const customerElement = document.getElementById('existingCustomer') as HTMLSelectElement;
+    this.numberCache = customerElement?.value;
     // Überprüfe, ob ein individueller Betrag angegeben wurde
     const customAmountElement = document.getElementById('customAmount') as HTMLInputElement;
     if (customAmountElement && customAmountElement.value) {
       formData.customAmount = customAmountElement.value;
+    }
+    console.log("Individueller Betrag aus form:", formData.customAmount);
+    if (this.isNewCustomer) {
+      formData.firstName = (document.getElementById('NewfirstName') as HTMLInputElement)?.value;
+      formData.lastName = (document.getElementById('NewlastName') as HTMLInputElement)?.value;
+
+      // Erstelle neuen Kunden
+      const newCustomerData = {
+        vorname: formData.firstName,
+        nachname: formData.lastName
+      };
+    fetch('http://localhost/Dr.Blech/backend/api/index.php/api/customers',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCustomerData)
+    }).then(response => response.json())
+    .then(data => {
+      console.log('Kunde erfolgreich erstellt', data);
+      this.numberCache = data.customerNumber; 
+    })
     }
   
     console.log("data", formData); 
@@ -178,17 +215,16 @@ export class DashboardComponent implements AfterViewInit {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Angebot erfolgreich erstellt', data);
+
       const blechId = data.id; // Speichere die zurückgegebene ID
-      console.log('Erstellte Blech ID:', blechId);
+      console.log('POST Blech, ID:', blechId);
   
       // Sende einen weiteren POST-Request mit der Blech ID und der ausgewählten Kunden ID
       const customerElement = document.getElementById('existingCustomer') as HTMLSelectElement;
       if (customerElement) {
-        const customerId = customerElement.value;
         const customerBlechData: any = {
           blechId: blechId,
-          customerNumber: customerId
+          customerNumber: this.numberCache
         };
   
         // Füge den individuellen Betrag hinzu, falls vorhanden
@@ -206,9 +242,9 @@ export class DashboardComponent implements AfterViewInit {
         })
         .then(response => response.json())
         .then(data => {
-          console.log('Kunde erfolgreich zugeordnet', data);
+          console.log('POST Offer, ID:', data.id);
           this.loadOffers(); 
-          location.reload(); 
+          //location.reload(); 
         })
         .catch(error => {
           console.error('Fehler beim Zuordnen des Kunden', error);
