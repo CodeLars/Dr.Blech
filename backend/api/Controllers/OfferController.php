@@ -60,27 +60,37 @@ class OfferController
         file_put_contents($logFile, "Empfangene Daten: " . print_r($input, true), FILE_APPEND);
 
         if ($input) {
-            if ($input['customAmount']) {
+            if (isset($input['customAmount'])) {
                 $blechId = (int)$input['blechId'];
                 $customerNumber = (int)($input['customerNumber']);
                 $customAmount = $input['customAmount'];
 
+                $sql = "SELECT Menge 
+                FROM blech where id = $blechId";
+
+                $result = $this->db->select($sql);
+                $menge = $result[0]['Menge'];
                 // Kunden-ID aus der Datenbank anhand der Kundennummer holen
                 $customerSql = "SELECT id FROM kunde WHERE kundennummer = $customerNumber";
                 $customerResult = $this->db->select($customerSql);
 
                 if ($customerResult && count($customerResult) > 0) {
                     $customerId = (int)$customerResult[0]['id'];
-
+                    $gewinnzuschlag = round($this->db->escape($customAmount) * 0.30, 2);
+                    $einzelpreis = round($customAmount,2)+round($this->db->escape($customAmount) * 0.30, 2);
+                    $pauschalbetrag = round($einzelpreis * $menge, 2);
                     // Berechnung und Erstellung des Angebots
                     // Hier kannst du die Berechnungen für das Angebot hinzufügen
                     // ...
 
                     // Beispiel für die Erstellung eines Angebots in der Datenbank
-                    $sql = "INSERT INTO angebot (blech_id, kunden_id, pauschalbetrag) VALUES (
+                    $sql = "INSERT INTO angebot (blech_id, kunden_id, einzelpreis, gewinnzuschlag, pauschalbetrag) VALUES (
                         " . $this->db->escape($blechId) . ",
                         " . $this->db->escape($customerId) . ",
-                        " . ($customAmount !== null ? $this->db->escape($customAmount) : 'NULL') . "
+                        " . $this->db->escape($einzelpreis) . ",
+                        ". $this->db->escape($gewinnzuschlag).",
+                        ". $this->db->escape($pauschalbetrag)."
+
                     )";
 
                     $result = $this->db->execute($sql);
@@ -95,6 +105,13 @@ class OfferController
                     echo json_encode(['message' => 'Ungültige Kundennummer']);
                 }
             } else {
+                $result = $this->calculateOffer($input['blechId'], $input['customerNumber']);
+                if (is_numeric($result)) {
+                    echo json_encode(['message' => 'custom Angebot erfolgreich erstellt', 'id' => $result]);
+                } else {
+                    http_response_code(500);
+                    echo json_encode(['message' => 'Fehler beim Erstellen des Angebots', 'error' => $result]);
+                }
             }
         } else {
             http_response_code(400);
@@ -102,7 +119,80 @@ class OfferController
         }
     }
 
-    private function calculateOffer($blechId) {
+    private function calculateOffer($blechId, $customerNumber, $customAmount = null) {
+        // Get customer ID from customerNumber
+        $customerSql = "SELECT id FROM kunde WHERE kundennummer = '" . $this->db->escape($customerNumber)."'";
+        $customerResult = $this->db->select($customerSql);
         
+        if (!$customerResult || count($customerResult) === 0) {
+            return false; // Customer not found
+        }
+        
+        $customerId = (int)$customerResult[0]['id'];
+        
+        // Get Blech and Material data
+        $sql = "SELECT b.*, m.name as materialName, m.dichte, m.kosten_per_kg 
+                FROM blech b
+                JOIN material m ON b.Material = m.id
+                WHERE b.id = " . $this->db->escape($blechId);
+        
+        $blechResult = $this->db->select($sql);
+    
+        if ($blechResult && count($blechResult) > 0) {
+            $blech = $blechResult[0];
+            
+            if ($customAmount !== null) {
+                $gesamtpreis = $customAmount;
+            } else {
+                // Calculate dimensions and volume (cm³)
+                $flaeche = $blech['Breite'] * $blech['Länge']; // cm²
+                $volumen = ($flaeche * $blech['Dicke']) / 10; // cm³ (Dicke in mm -> cm)
+                
+                // Calculate weight (kg) and material costs
+                $gewicht = ($volumen * $blech['dichte']) / 1000; // Dichte in g/cm³ -> kg
+                $materialkosten = round($gewicht * $blech['kosten_per_kg'], 2);
+                
+                // Processing costs
+                $verarbeitungskosten = 0;
+                $verarbeitungskosten += 10.00;
+                if ($blech['Stanzen'] == '1') $verarbeitungskosten += 20.00;
+                if ($blech['Biegen'] == '1') $verarbeitungskosten += 15.00;
+                if ($blech['Oberflächenbehandlung'] == '1') $verarbeitungskosten += 25.00;
+                if ($blech['Einfräsen'] == '1') $verarbeitungskosten += 17.00;
+                
+                // Calculate subtotal
+                $zwischensumme = round($materialkosten + $verarbeitungskosten, 2);
+                $gewinnzuschlag = round($zwischensumme * 0.30, 2);
+                $einzelpreis = round($zwischensumme + $gewinnzuschlag, 2);
+                $gesamtpreis = round($einzelpreis * $blech['Menge'], 2);
+            }
+            
+            // Create offer in database
+            $sql = "INSERT INTO angebot (
+                blech_id, 
+                kunden_id, 
+                materialkosten,
+                verarbeitungskosten,
+                zwischensumme,
+                gewinnzuschlag,
+                einzelpreis,
+                pauschalbetrag
+            ) VALUES (
+                " . $this->db->escape($blechId) . ",
+                " . $this->db->escape($customerId) . ",
+                " . $this->db->escape($materialkosten) . ",
+                " . $this->db->escape($verarbeitungskosten) . ",
+                " . $this->db->escape($zwischensumme) . ",
+                " . $this->db->escape($gewinnzuschlag) . ",
+                " . $this->db->escape($einzelpreis) . ",
+                " . $this->db->escape($gesamtpreis) . "
+            )";
+            
+            $result = $this->db->execute($sql);
+            if (is_numeric($result)) {
+                return $result;
+            }
+        }
+        return false;
     }
 }

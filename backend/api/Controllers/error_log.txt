@@ -1053,3 +1053,643 @@ Empfangene Daten: Array
     [customerNumber] => 787
     [customAmount] => 7777
 )
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 6
+    [length] => 6
+    [thickness] => 3
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 
+    [milling] => 1
+    [quantity] => 5
+)
+Empfangene Daten: Array
+(
+    [blechId] => 91
+    [customerNumber] => 46446
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerId] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerId] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechId] => 92
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 1
+)
+Empfangene Daten: Array
+(
+    [blechId] => 93
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 1
+)
+Empfangene Daten: Array
+(
+    [blechId] => 94
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 1
+    [firstName] => Johan
+    [lastName] => Guttenberg
+)
+Empfangene Daten: Array
+(
+    [blechId] => 95
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => baba
+    [lastName] => baba
+)
+Empfangene Daten: Array
+(
+    [blechId] => 96
+    [customerNumber] => V02MDGP6
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => jo
+    [lastName] => k
+)
+Empfangene Daten: Array
+(
+    [blechId] => 97
+    [customerNumber] => WGSX94TD
+)
+Empfangene Daten: Array
+(
+    [blechId] => 97
+    [customerNumber] => WGSX94TD
+)
+Empfangene Daten: Array
+(
+    [blechId] => 97
+    [customerNumber] => WGSX94TD
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 4
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 
+    [quantity] => 5
+    [customAmount] => 555
+    [firstName] => Steven
+    [lastName] => Levy
+)
+Empfangene Daten: Array
+(
+    [blechId] => 98
+    [customerNumber] => V2ZR8FJ2
+    [customAmount] => 555
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 6
+    [length] => 6
+    [thickness] => 4
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 6
+    [firstName] => Steven
+    [lastName] => fgdgfd
+)
+Empfangene Daten: Array
+(
+    [blechId] => 99
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 6
+    [length] => 6
+    [thickness] => 4
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 6
+    [firstName] => Steven
+    [lastName] => fgdgfd
+)
+Empfangene Daten: Array
+(
+    [blechId] => 100
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 
+    [quantity] => 5
+    [firstName] => abc
+    [lastName] => ab
+)
+Empfangene Daten: Array
+(
+    [blechId] => 101
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => neu
+    [lastName] => jubde
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 1
+    [width] => 6
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => gfdhgdh
+    [lastName] => fdhgfhjgfh
+)
+Empfangene Daten: Array
+(
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 6
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => fdhgj
+    [lastName] => gfhgh
+)
+Empfangene Daten: Array
+(
+    [blechId] => 104
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => fghfgjf
+    [lastName] => gfhfghfghfg
+)
+Empfangene Daten: Array
+(
+    [blechId] => 105
+    [customerNumber] => W0RP7061
+)
+Empfangene Daten: Array
+(
+    [blechId] => 105
+    [customerNumber] => W0RP7061
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => fghfgjf
+    [lastName] => gfhfghfghfg
+)
+Empfangene Daten: Array
+(
+    [blechId] => 106
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 6
+    [length] => 6
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 
+    [quantity] => 5
+    [firstName] => polpasd
+    [lastName] => fsdgdfgdf
+)
+Empfangene Daten: Array
+(
+    [blechId] => 107
+    [customerNumber] => 3V1YXFS3
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 1
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 1
+    [quantity] => 5
+)
+Empfangene Daten: Array
+(
+    [blechId] => 108
+    [customerNumber] => JKMHF6K4
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 
+    [quantity] => 5
+    [customAmount] => 55
+)
+Empfangene Daten: Array
+(
+    [blechId] => 109
+    [customerNumber] => JKMHF6K4
+    [customAmount] => 55
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 4
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 
+    [quantity] => 2
+    [customAmount] => 300
+)
+Empfangene Daten: Array
+(
+    [blechId] => 110
+    [customerNumber] => 3V9WFYM9
+    [customAmount] => 300
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 34
+    [length] => 47
+    [thickness] => 3
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 
+    [milling] => 1
+    [quantity] => 2
+    [firstName] => Naruto
+    [lastName] => Uzomaki
+)
+Empfangene Daten: Array
+(
+    [blechId] => 111
+    [customerNumber] => 
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 5
+    [width] => 55
+    [length] => 55
+    [thickness] => 4
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 
+    [milling] => 1
+    [quantity] => 1
+    [firstName] => Monka
+    [lastName] => Saft
+)
+Empfangene Daten: Array
+(
+    [blechId] => 112
+    [customerNumber] => NUX2PRTK
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 4
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 
+    [quantity] => 5
+    [customAmount] => 555
+    [firstName] => Naruto
+    [lastName] => Boruto
+)
+Empfangene Daten: Array
+(
+    [blechId] => 113
+    [customerNumber] => YKORDXPD
+    [customAmount] => 555
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 55
+    [length] => 300
+    [thickness] => 4
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 
+    [quantity] => 4
+    [customAmount] => 444
+    [firstName] => Naruto
+    [lastName] => MonkaS
+)
+Empfangene Daten: Array
+(
+    [blechId] => 114
+    [customerNumber] => 
+    [customAmount] => 444
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 55
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 1
+    [quantity] => 5
+    [firstName] => Naruto
+    [lastName] => Machma
+)
+Empfangene Daten: Array
+(
+    [blechId] => 115
+    [customerNumber] => KZNMM13P
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 1
+    [quantity] => 5
+    [firstName] => Versuch
+    [lastName] => Versuch 1
+)
+Empfangene Daten: Array
+(
+    [blechId] => 116
+    [customerNumber] => I4XOBWY2
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 1
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 
+    [milling] => 1
+    [quantity] => 5
+)
+Empfangene Daten: Array
+(
+    [blechId] => 117
+    [customerNumber] => 123
+)
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 2
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 
+    [surfaceTreatment] => 
+    [milling] => 
+    [quantity] => 5
+    [customAmount] => 555
+)
+Empfangene Daten: Array
+(
+    [blechId] => 118
+    [customerNumber] => 123
+    [customAmount] => 555
+)

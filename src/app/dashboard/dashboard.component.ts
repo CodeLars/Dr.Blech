@@ -10,10 +10,11 @@ export class DashboardComponent implements AfterViewInit {
   isNewCustomer = false;
   isCustomAmount = false;
   numberCache = "";
+  customerBlechData: any = {};
   customers: any[] = [];
   materials: any[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -31,20 +32,20 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   loadCustomers(): void {
-    console.log("loadCustomers aufgerufen"); 
+    console.log("loadCustomers aufgerufen");
     fetch('http://localhost/Dr.Blech/backend/api/index.php/api/customers')
       .then(response => {
-        console.log("Response erhalten:", response); 
+        console.log("Response erhalten:", response);
         return response.json();
       })
-      .then((data: any[]) => { 
-        console.log("Daten erhalten:", data); 
+      .then((data: any[]) => {
+        console.log("Daten erhalten:", data);
         this.customers = data.map((customer: any) => ({
-          id: customer.kundennummer, 
-          name: `${customer.vorname} ${customer.nachname} (${customer.kundennummer})` 
+          id: customer.kundennummer,
+          name: `${customer.vorname} ${customer.nachname} (${customer.kundennummer})`
         }));
-        console.log("Kunden geladen:", this.customers); 
-        this.updateCustomerDropdown(); 
+        console.log("Kunden geladen:", this.customers);
+        this.updateCustomerDropdown();
       })
       .catch(error => {
         console.error('Fehler beim Laden der Kunden', error);
@@ -52,15 +53,15 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   loadOffers(): void {
-    console.log("loadOffers aufgerufen"); 
+    console.log("loadOffers aufgerufen");
     fetch('http://localhost/Dr.Blech/backend/api/index.php/api/offers')
       .then(response => {
-        console.log("Response erhalten:", response); 
+        console.log("Response erhalten:", response);
         return response.json();
       })
-      .then((data: any[]) => { 
-        console.log("Angebote erhalten:", data); 
-        this.updateOffersTable(data); 
+      .then((data: any[]) => {
+        console.log("Angebote erhalten:", data);
+        this.updateOffersTable(data);
       })
       .catch(error => {
         console.error('Fehler beim Laden der Angebote', error);
@@ -68,20 +69,20 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   loadMaterials(): void {
-    console.log("loadMaterials aufgerufen"); 
+    console.log("loadMaterials aufgerufen");
     fetch('http://localhost/Dr.Blech/backend/api/index.php/api/materials')
       .then(response => {
-        console.log("Response erhalten:", response); 
+        console.log("Response erhalten:", response);
         return response.json();
       })
-      .then((data: any[]) => { 
-        console.log("Materialien erhalten:", data); 
+      .then((data: any[]) => {
+        console.log("Materialien erhalten:", data);
         this.materials = data.map((material: any) => ({
           id: material.Id, // Verwende 'Id' anstelle von 'id'
-          name: material.name 
+          name: material.name
         }));
-        console.log("Materialien geladen:", this.materials); 
-        this.updateMaterialDropdown(); 
+        console.log("Materialien geladen:", this.materials);
+        this.updateMaterialDropdown();
       })
       .catch(error => {
         console.error('Fehler beim Laden der Materialien', error);
@@ -92,7 +93,7 @@ export class DashboardComponent implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       const tableBody = document.querySelector('#example tbody');
       if (tableBody) {
-        tableBody.innerHTML = ''; 
+        tableBody.innerHTML = '';
         if (Array.isArray(offers)) {
           offers.forEach(offer => {
             const row = document.createElement('tr');
@@ -115,16 +116,16 @@ export class DashboardComponent implements AfterViewInit {
 
   updateCustomerDropdown(): void {
     const selectElement = document.getElementById('existingCustomer') as HTMLSelectElement;
-    selectElement.innerHTML = ''; 
-        // Create placeholder option with disabled attribute
-        const placeholderOption = new Option('Kunde auswählen', '');
-        placeholderOption.disabled = true;
-        placeholderOption.selected = true;
-        selectElement.appendChild(placeholderOption);
+    selectElement.innerHTML = '';
+    // Create placeholder option with disabled attribute
+    const placeholderOption = new Option('Kunde auswählen', '');
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    selectElement.appendChild(placeholderOption);
 
     this.customers.forEach(customer => {
       const option = document.createElement('option');
-      option.value = customer.id.toString(); 
+      option.value = customer.id.toString();
       option.text = customer.name;
       selectElement.appendChild(option);
     });
@@ -132,7 +133,7 @@ export class DashboardComponent implements AfterViewInit {
 
   updateMaterialDropdown(): void {
     const selectElement = document.getElementById('material') as HTMLSelectElement;
-    selectElement.innerHTML = ''; 
+    selectElement.innerHTML = '';
 
     const placeholderOption = new Option('Material auswählen', '');
     placeholderOption.disabled = true;
@@ -141,7 +142,7 @@ export class DashboardComponent implements AfterViewInit {
 
     this.materials.forEach(material => {
       const option = document.createElement('option');
-      option.value = material.id.toString(); 
+      option.value = material.id.toString();
       option.text = material.name;
       selectElement.appendChild(option);
     });
@@ -157,10 +158,10 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   onSubmit(event: Event): void {
-    event.preventDefault(); 
-  
-    console.log("onSubmit aufgerufen"); 
-  
+    event.preventDefault();
+
+    console.log("onSubmit aufgerufen");
+
     const formData: any = {
       blechart: (document.getElementById('blechart') as HTMLSelectElement)?.value,
       material: (document.getElementById('material') as HTMLSelectElement)?.value,
@@ -192,20 +193,29 @@ export class DashboardComponent implements AfterViewInit {
         vorname: formData.firstName,
         nachname: formData.lastName
       };
-    fetch('http://localhost/Dr.Blech/backend/api/index.php/api/customers',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newCustomerData)
-    }).then(response => response.json())
-    .then(data => {
-      console.log('Kunde erfolgreich erstellt', data);
-      this.numberCache = data.customerNumber; 
-    })
+      fetch('http://localhost/Dr.Blech/backend/api/index.php/api/customers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCustomerData)
+      }).then(response => response.json())
+        .then(data => {
+          console.log('Kunde erfolgreich erstellt', data);
+          this.numberCache = data.customerNumber;
+          // Create Blech after customer is created
+          this.createBlech(formData);
+        })
+    } else {
+      // Create Blech with existing customer
+      this.createBlech(formData);
     }
-  
-    console.log("data", formData); 
+
+
+  }
+
+  private createBlech(formData: any) {
+    console.log("data", formData);
     fetch('http://localhost/Dr.Blech/backend/api/index.php/api/blech', {
       method: 'POST',
       headers: {
@@ -213,47 +223,47 @@ export class DashboardComponent implements AfterViewInit {
       },
       body: JSON.stringify(formData)
     })
-    .then(response => response.json())
-    .then(data => {
+      .then(response => response.json())
+      .then(data => {
 
-      const blechId = data.id; // Speichere die zurückgegebene ID
-      console.log('POST Blech, ID:', blechId);
-  
-      // Sende einen weiteren POST-Request mit der Blech ID und der ausgewählten Kunden ID
-      const customerElement = document.getElementById('existingCustomer') as HTMLSelectElement;
-      if (customerElement) {
-        const customerBlechData: any = {
-          blechId: blechId,
-          customerNumber: this.numberCache
-        };
-  
+        const blechId = data.id; // Speichere die zurückgegebene ID
+        console.log('POST Blech, ID:', blechId);
+
+        // Sende einen weiteren POST-Request mit der Blech ID und der ausgewählten Kunden ID
+        const customerElement = document.getElementById('existingCustomer') as HTMLSelectElement;
+        if (this.numberCache !== '') {
+          this.customerBlechData.blechId = blechId;
+          this.customerBlechData.customerNumber = this.numberCache;
+        } else {
+          this.customerBlechData.blechId = blechId;
+          this.customerBlechData.customerNumber = customerElement?.value;
+        }
+
         // Füge den individuellen Betrag hinzu, falls vorhanden
         if (formData.customAmount) {
-          customerBlechData.customAmount = formData.customAmount;
+          this.customerBlechData.customAmount = formData.customAmount;
         }
-        console.log(JSON.stringify(customerBlechData));
-  
+        console.log("PRE POST OFFER", JSON.stringify(this.customerBlechData));
+
         fetch('http://localhost/Dr.Blech/backend/api/index.php/api/offers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(customerBlechData)
+          body: JSON.stringify(this.customerBlechData)
         })
-        .then(response => response.json())
-        .then(data => {
-          console.log('POST Offer, ID:', data.id);
-          this.loadOffers(); 
-          //location.reload(); 
-        })
-        .catch(error => {
-          console.error('Fehler beim Zuordnen des Kunden', error);
-        });
-      } else {
-        console.error('Kunden-Element nicht gefunden');
-      }
-    })
-    .catch(error => {
-      console.error('Fehler beim Erstellen des Angebots', error);
-    });
-  }}
+          .then(response => response.json())
+          .then(data => {
+            console.log('POST Offer, ID:', data.id);
+            this.loadOffers();
+            location.reload();
+          })
+          .catch(error => {
+            console.error('Fehler beim Zuordnen des Kunden', error);
+          });
+      })
+      .catch(error => {
+        console.error('Fehler beim Erstellen des Angebots', error);
+      });
+  }
+}
