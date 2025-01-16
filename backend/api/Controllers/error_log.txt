@@ -1693,3 +1693,22 @@ Empfangene Daten: Array
     [customerNumber] => 123
     [customAmount] => 555
 )
+Empfangene Daten: Array
+(
+    [blechart] => Rechteckblech
+    [material] => 3
+    [width] => 5
+    [length] => 5
+    [thickness] => 5
+    [cutting] => 1
+    [stamping] => 
+    [bending] => 1
+    [surfaceTreatment] => 1
+    [milling] => 1
+    [quantity] => 3
+)
+Empfangene Daten: Array
+(
+    [blechId] => 119
+    [customerNumber] => V02MDGP6
+)
